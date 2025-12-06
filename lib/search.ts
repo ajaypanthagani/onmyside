@@ -18,10 +18,17 @@ export interface SearchResult {
  * @returns Array of search results
  */
 export async function searchWeb(query: string, maxResults: number = 5): Promise<SearchResult[]> {
+  // Access environment variables - Next.js will replace these at build time for static exports
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
   const searchEngineId = process.env.NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID;
 
   if (!apiKey || !searchEngineId) {
+    console.error('Environment variables check:', {
+      hasApiKey: !!apiKey,
+      hasSearchEngineId: !!searchEngineId,
+      apiKeyLength: apiKey?.length || 0,
+      searchEngineIdLength: searchEngineId?.length || 0,
+    });
     throw new Error('Google API key and Search Engine ID must be configured. Set NEXT_PUBLIC_GOOGLE_API_KEY and NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID environment variables.');
   }
 

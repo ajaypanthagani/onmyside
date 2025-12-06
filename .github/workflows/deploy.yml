@@ -31,6 +31,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Verify secrets are configured
+        run: |
+          echo "Checking if secrets are set..."
+          if [ "${{ secrets.NEXT_PUBLIC_GOOGLE_API_KEY }}" == "" ]; then
+            echo "::error::NEXT_PUBLIC_GOOGLE_API_KEY secret is not set"
+            echo "Please add this secret in: Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          if [ "${{ secrets.NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID }}" == "" ]; then
+            echo "::error::NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID secret is not set"
+            echo "Please add this secret in: Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          echo "✓ Both secrets are configured"
+
       - name: Build
         run: npm run build
         env:
