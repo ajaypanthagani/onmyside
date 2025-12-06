@@ -36,8 +36,8 @@ jobs:
         env:
           NEXT_PUBLIC_GOOGLE_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_API_KEY }}
           NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE_ID }}
-          # If your repo is NOT "username.github.io", uncomment and set your repo name:
-          # GITHUB_REPOSITORY_NAME: ${{ secrets.GITHUB_REPOSITORY_NAME }}
+          # Set repository name for subdirectory deployment
+          GITHUB_REPOSITORY_NAME: onmyside
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
